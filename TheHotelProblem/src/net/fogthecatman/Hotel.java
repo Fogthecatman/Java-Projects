@@ -9,7 +9,7 @@ public class Hotel {
 
 	private final int numFloors;
 	private final Floor[] hotelFloors;
-	
+
 	/**
 	 * Constructs a new Hotel object with the given room layout. 
 	 * 
@@ -28,23 +28,37 @@ public class Hotel {
 		hotelFloors = new Floor[numFloors];
 		getRoomsByFloor(floorRooms);
 	}
-	
-	public int getFloorRooms(int floor)
+
+	/**
+	 * Checks to see if this hotel has a floor with the given number.
+	 * 
+	 * @param floorNum The floor number to check for 
+	 * @return true if this hotel has a floor with the given number, false otherwise
+	 */
+	public boolean hasFloor(int floorNum)
 	{
-		if (floor >= 1 && floor <= numFloors)
+		return floorNum > 0 && floorNum <= hotelFloors.length;
+	}
+
+	/**
+	 * Checks to see if this hotel has the room with the given room number on the
+	 * floor with the given floor number.
+	 * 
+	 * @param floorNum The floor number of the room
+	 * @param roomNum The room number to check for
+	 * @return true if there is a floor with the given floor number and that this
+	 *         floor has a room with the given room number, false otherwise
+	 */
+	public boolean hasRoom(int floorNum, int roomNum)
+	{
+		if (floorNum > 0 && floorNum <= hotelFloors.length)
 		{
-			return hotelFloors[floor - 1].getRooms();
+			return hotelFloors[floorNum - 1].hasRoom(roomNum);
 		}
 		else
 		{
-			return 0;
+			return false;
 		}
-	}
-
-	//Gets and Sets
-	public int getFloors()
-	{
-		return numFloors;
 	}
 
 	/**
@@ -60,7 +74,7 @@ public class Hotel {
 		if (floor >= 1 && floor <= numFloors)
 		{
 			hotelFloors[floor - 1].setIsClean(room, isClean);
-			
+
 			return;
 		}
 		else
@@ -72,20 +86,20 @@ public class Hotel {
 	public String toString()
 	{
 		String object = "";
-		
+
 		object += "\nThis Hotel Object\n" 
 				+ "\tNumber Floors: " + numFloors;
-		
+
 		for(int j = 0; j < hotelFloors.length; j++)
 		{
 			object += hotelFloors[j].toString();
 		}
-		
+
 		object += "\n";
-		
+
 		return object;
 	}
-	
+
 	private void getRoomsByFloor(int[] floorRooms)
 	{
 		/*loop through each floor and assign it a specific amount of rooms*/

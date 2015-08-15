@@ -43,25 +43,42 @@ public class Driver {
 		}
 				
 		Hotel myHotel = new Hotel(floorRooms);
-		
+
 		/*Loop as long as I want the program running*/
 		while(continueLoop)
 		{
-			floorInput = getInput(keyboard, "\nInput What Floor to Access: ");
-			roomInput = getInput(keyboard, "\nInput What Room to Access: ");
-			
-			floorInt = Integer.parseInt(floorInput);
-			roomInt = Integer.parseInt(roomInput);
-			
-			/*Input Validation checking for floor/room amounts */
-			int floorRoomAmt = myHotel.getFloorRooms(floorInt - 1);
-			int floorsAmt = myHotel.getFloors();
-			roomInt = validateInput(keyboard, roomInt, floorRoomAmt, 1, "Please Input Room Number: ");
-			floorInt = validateInput(keyboard, floorInt, floorsAmt, 1, "Please Input Floor Number: ");
-			/*Input is good*/
-			
-			
-								
+			/* Ask for the floor number until we get a valid answer. */
+			while (true)
+			{
+				floorInput = getInput(keyboard, "\nInput What Floor to Access: ");
+				floorInt = Integer.parseInt(floorInput);
+
+				if (myHotel.hasFloor(floorInt))
+				{
+					break;
+				}
+				else
+				{
+					System.out.println("There is no floor " + floorInt + "!");
+				}
+			}
+
+			/* Ask for the room number until we get a valid answer. */
+			while (true)
+			{
+				roomInput = getInput(keyboard, "\nInput What Room to Access: ");
+				roomInt = Integer.parseInt(roomInput);
+
+				if (myHotel.hasRoom(floorInt, roomInt))
+				{
+					break;
+				}
+				else
+				{
+					System.out.println("There is no room " + roomInt + " on floor " + floorInt + "!");
+				}
+			}
+
 			/*
 			 * Here is a validation loop checking for a correct input
 			 * user should only input a 0 or 1 at this point.
@@ -117,30 +134,5 @@ public class Driver {
 		returnStmt = keyboard.next();
 		return returnStmt;
 	}
-	
-	public static int validateInput(Scanner keyboard, int inAmt, int topAmt, int bottomAmt, String inputString)
-	{
-		boolean goodInput = false;
-		String inputVal = "";
-		int inputNum = inAmt;
-		if(inAmt > topAmt || inAmt < bottomAmt)
-		{
-			while(!goodInput)
-			{
-				System.out.println("BAD INPUT, please try again");
-				inputVal = getInput(keyboard, inputString);
-				
-				inputNum = Integer.parseInt(inputVal);
-				
-				if(inputNum <= topAmt && inputNum >= bottomAmt)
-					goodInput = true;
-			
-			}
-		}
-		else
-		{	
-			System.out.println("Valid Input");
-		}
-		return inputNum;	
-	}
+
 }

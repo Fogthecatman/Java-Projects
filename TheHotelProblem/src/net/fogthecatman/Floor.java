@@ -16,7 +16,7 @@ public class Floor {
 	private final int floorNum;
 	private final int numRooms;
 	private final Room[] floorRooms;
-	
+
 	public Floor(int floorNum, int setRooms)
 	{
 		this.floorNum = floorNum;
@@ -24,11 +24,16 @@ public class Floor {
 		floorRooms = new Room[numRooms];
 		setRoomsOnFloor();
 	}
-	
-	//Gets and Sets
-	public int getRooms()
+
+	/**
+	 * Checks to see if this floor has a room with the given number.
+	 * 
+	 * @param roomNum The room number to test
+	 * @return true if this floor has a room with this number, false otherwise
+	 */
+	public boolean hasRoom(int roomNum)
 	{
-		return numRooms;
+		return roomNum > 0 && roomNum <= floorRooms.length;
 	}
 
 	/**
@@ -58,22 +63,22 @@ public class Floor {
 	public String toString()
 	{
 		String object = "";
-		
+
 		object += "\nThis Floor Object-" + floorNum + ":\n"
 				+ "Number of Rooms: " + numRooms;
-		
+
 		for(int j = 0; j < floorRooms.length; j++)
 		{
 			object += 	 "\n\tRoom Number-" + (j + 1) + "\n"
-						 + floorRooms[j].toString();
+					+ floorRooms[j].toString();
 		}
-		
+
 		object += "\n";
-		
+
 		return object;
-				
+
 	}
-	
+
 	public void setRoomsOnFloor()
 	{
 		for(int i = 0; i < numRooms; i++)
