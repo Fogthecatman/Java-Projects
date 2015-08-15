@@ -1,35 +1,32 @@
 package net.fogthecatman;
 
 /*
- * 
- * The Hotel Object is created in Driver.java
- * 
  * This object keeps track of floors and sets
  * amount of rooms on each floor located in the 
  * method getRoomsByFloor().
- * 
- * 
  */
-import java.util.Scanner;
-
 public class Hotel {
 
 	private int numFloors;
 	private Floor[] hotelFloors;
 	
-	public Hotel(int setFloors)
+	/**
+	 * Constructs a new Hotel object with the given room layout. 
+	 * 
+	 * The layout is defined by the length and values of the floorRooms argument.
+	 * The length of the array is the number of floors to create and the value
+	 * of each element is the number of rooms to create on that floor.
+	 * 
+	 * e.g. the array [3,2,1] would produce a Hotel with three rooms on the first
+	 * floor, two rooms on the second floor, and one room on the third floor. 
+	 * 
+	 * @param floorRooms An array containing the number of rooms on each floor
+	 */
+	public Hotel(int[] floorRooms)
 	{
-		numFloors = setFloors;
+		numFloors = floorRooms.length;
 		hotelFloors = new Floor[numFloors];
-		getRoomsByFloor();
-	}
-	
-	public Hotel()
-	{
-		/*Default Constructor*/
-		numFloors = 5;
-		hotelFloors = new Floor[numFloors];
-		getRoomsByFloor();
+		getRoomsByFloor(floorRooms);
 	}
 	
 	public int getFloorRooms(int floor)
@@ -94,18 +91,13 @@ public class Hotel {
 		return object;
 	}
 	
-	public void getRoomsByFloor()
+	private void getRoomsByFloor(int[] floorRooms)
 	{
-		int numRooms;
-		Scanner keyboard = new Scanner(System.in);
 		/*loop through each floor and assign it a specific amount of rooms*/
-		for(int i = 0; i < numFloors; i++)
+		for (int i = 0; i < floorRooms.length; i++)
 		{
-			System.out.println("\nInput the number of rooms on Floor-"+ (i + 1) + ": ");
-			numRooms = keyboard.nextInt();
-			Floor newFloor = new Floor(numRooms);
+			Floor newFloor = new Floor(floorRooms[i]);
 			hotelFloors[i] = newFloor;
-			System.out.print(newFloor);	
 		}
 	}
 }

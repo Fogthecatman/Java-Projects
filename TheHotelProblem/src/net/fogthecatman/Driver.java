@@ -33,8 +33,16 @@ public class Driver {
 		input = getInput(keyboard, "Please input the amount of floors: ");
 		
 		inFloors = Integer.parseInt(input);
+		
+		int[] floorRooms = new int[inFloors];
+		
+		for (int i = 0; i < inFloors; i++)
+		{
+			System.out.println("\nInput the number of rooms on Floor-"+ (i + 1) + ": ");
+			floorRooms[i] = keyboard.nextInt();
+		}
 				
-		Hotel myHotel = new Hotel(inFloors);
+		Hotel myHotel = new Hotel(floorRooms);
 		
 		/*Loop as long as I want the program running*/
 		while(continueLoop)
