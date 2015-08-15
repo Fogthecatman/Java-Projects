@@ -12,16 +12,14 @@ package net.fogthecatman;
  */
 
 public class Floor {
+
+	private final int floorNum;
+	private final int numRooms;
+	private final Room[] floorRooms;
 	
-	private static int floorNumInc = 0;
-	private int floorNum;
-	private int numRooms;
-	private Room[] floorRooms;
-	
-	public Floor(int setRooms)
+	public Floor(int floorNum, int setRooms)
 	{
-		floorNumInc++;
-		floorNum = floorNumInc;
+		this.floorNum = floorNum;
 		numRooms = setRooms;
 		floorRooms = new Room[numRooms];
 		setRoomsOnFloor();
@@ -32,12 +30,7 @@ public class Floor {
 	{
 		return numRooms;
 	}
-	
-	public void setRooms(int numRooms)
-	{
-		this.numRooms = numRooms; 
-	}
-	
+
 	/**
 	 * Sets the clean state of the Room with the given room number.
 	 *  

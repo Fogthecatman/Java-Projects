@@ -7,8 +7,8 @@ package net.fogthecatman;
  */
 public class Hotel {
 
-	private int numFloors;
-	private Floor[] hotelFloors;
+	private final int numFloors;
+	private final Floor[] hotelFloors;
 	
 	/**
 	 * Constructs a new Hotel object with the given room layout. 
@@ -46,12 +46,7 @@ public class Hotel {
 	{
 		return numFloors;
 	}
-	
-	public void setFloors(int numFloors)
-	{
-		this.numFloors = numFloors;	
-	}
-	
+
 	/**
 	 * Sets the clean state of the Room with the given room number
 	 * on the floor with the given floor number.
@@ -96,7 +91,7 @@ public class Hotel {
 		/*loop through each floor and assign it a specific amount of rooms*/
 		for (int i = 0; i < floorRooms.length; i++)
 		{
-			Floor newFloor = new Floor(floorRooms[i]);
+			Floor newFloor = new Floor(i + 1, floorRooms[i]);
 			hotelFloors[i] = newFloor;
 		}
 	}
