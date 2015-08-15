@@ -14,8 +14,8 @@ import java.util.Scanner;
 
 public class Hotel {
 
-	public int numFloors;
-	public Floor[] hotelFloors;
+	private int numFloors;
+	private Floor[] hotelFloors;
 	
 	public Hotel(int setFloors)
 	{
@@ -32,6 +32,18 @@ public class Hotel {
 		getRoomsByFloor();
 	}
 	
+	public int getFloorRooms(int floor)
+	{
+		if (floor >= 1 && floor <= numFloors)
+		{
+			return hotelFloors[floor - 1].getRooms();
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
 	//Gets and Sets
 	public int getFloors()
 	{
@@ -43,7 +55,28 @@ public class Hotel {
 		this.numFloors = numFloors;	
 	}
 	
-	
+	/**
+	 * Sets the clean state of the Room with the given room number
+	 * on the floor with the given floor number.
+	 * 
+	 * @param floor The floor number of the room
+	 * @param room The room number
+	 * @param isClean The clean status of the room
+	 */
+	public void setIsClean(int floor, int room, boolean isClean)
+	{
+		if (floor >= 1 && floor <= numFloors)
+		{
+			hotelFloors[floor - 1].setIsClean(room, isClean);
+			
+			return;
+		}
+		else
+		{
+			System.out.println("There is no floor " + floor + " in this hotel!");
+		}
+	}
+
 	public String toString()
 	{
 		String object = "";

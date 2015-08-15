@@ -13,10 +13,10 @@ package net.fogthecatman;
 
 public class Floor {
 	
-	public static int floorNumInc = 0;
-	public int floorNum;
-	public int numRooms;
-	public Room[] floorRooms;
+	private static int floorNumInc = 0;
+	private int floorNum;
+	private int numRooms;
+	private Room[] floorRooms;
 	
 	public Floor(int setRooms)
 	{
@@ -25,10 +25,6 @@ public class Floor {
 		numRooms = setRooms;
 		floorRooms = new Room[numRooms];
 		setRoomsOnFloor();
-	}
-	public Floor()
-	{
-		numRooms = 5;
 	}
 	
 	//Gets and Sets
@@ -42,6 +38,24 @@ public class Floor {
 		this.numRooms = numRooms; 
 	}
 	
+	/**
+	 * Sets the clean state of the Room with the given room number.
+	 *  
+	 * @param room The room number
+	 * @param isClean The clean status of the room
+	 */
+	public void setIsClean(int room, boolean isClean)
+	{
+		if (room > 0 && room < numRooms)
+		{
+			floorRooms[room - 1].setIsClean(isClean);
+		}
+		else
+		{
+			System.out.println("The is no room " + room + " on this floor!");
+		}
+	}
+
 	/*
 	 * This toString method is called whenever the object is
 	 * referenced. The for loop in this method adds the toString
@@ -68,7 +82,7 @@ public class Floor {
 	}
 	
 	public void setRoomsOnFloor()
-	{	
+	{
 		for(int i = 0; i < numRooms; i++)
 		{
 			Room newRoom = new Room();

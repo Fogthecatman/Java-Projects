@@ -46,7 +46,7 @@ public class Driver {
 			roomInt = Integer.parseInt(roomInput);
 			
 			/*Input Validation checking for floor/room amounts */
-			int floorRoomAmt = myHotel.hotelFloors[floorInt - 1].getRooms();
+			int floorRoomAmt = myHotel.getFloorRooms(floorInt - 1);
 			int floorsAmt = myHotel.getFloors();
 			roomInt = validateInput(keyboard, roomInt, floorRoomAmt, 1, "Please Input Room Number: ");
 			floorInt = validateInput(keyboard, floorInt, floorsAmt, 1, "Please Input Floor Number: ");
@@ -81,9 +81,8 @@ public class Driver {
 					goodInput = false;
 				}
 			}				
-		
-			/*Accessing public arrays to get to specific room */
-			myHotel.hotelFloors[floorInt - 1].floorRooms[roomInt - 1].setIsClean(isRoomClean);
+
+			myHotel.setIsClean(floorInt, roomInt, isRoomClean);
 				
 			String quitInput = getInput(keyboard, "Would you like to stop? (y/n): ");
 			if(quitInput.equals("y"))
