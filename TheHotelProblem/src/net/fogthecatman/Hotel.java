@@ -1,78 +1,112 @@
 package net.fogthecatman;
 
 /*
- * 
- * The Hotel Object is created in Driver.java
- * 
  * This object keeps track of floors and sets
  * amount of rooms on each floor located in the 
  * method getRoomsByFloor().
- * 
- * 
  */
-import java.util.Scanner;
-
 public class Hotel {
 
-	public int numFloors;
-	public Floor[] hotelFloors;
-	
-	public Hotel(int setFloors)
+	private final int numFloors;
+	private final Floor[] hotelFloors;
+
+	/**
+	 * Constructs a new Hotel object with the given room layout. 
+	 * 
+	 * The layout is defined by the length and values of the floorRooms argument.
+	 * The length of the array is the number of floors to create and the value
+	 * of each element is the number of rooms to create on that floor.
+	 * 
+	 * e.g. the array [3,2,1] would produce a Hotel with three rooms on the first
+	 * floor, two rooms on the second floor, and one room on the third floor. 
+	 * 
+	 * @param floorRooms An array containing the number of rooms on each floor
+	 */
+	public Hotel(int[] floorRooms)
 	{
-		numFloors = setFloors;
+		numFloors = floorRooms.length;
 		hotelFloors = new Floor[numFloors];
-		getRoomsByFloor();
+		getRoomsByFloor(floorRooms);
 	}
-	
-	public Hotel()
+
+	/**
+	 * Checks to see if this hotel has a floor with the given number.
+	 * 
+	 * @param floorNum The floor number to check for 
+	 * @return true if this hotel has a floor with the given number, false otherwise
+	 */
+	public boolean hasFloor(int floorNum)
 	{
-		/*Default Constructor*/
-		numFloors = 5;
-		hotelFloors = new Floor[numFloors];
-		getRoomsByFloor();
+		return floorNum > 0 && floorNum <= hotelFloors.length;
 	}
-	
-	//Gets and Sets
-	public int getFloors()
+
+	/**
+	 * Checks to see if this hotel has the room with the given room number on the
+	 * floor with the given floor number.
+	 * 
+	 * @param floorNum The floor number of the room
+	 * @param roomNum The room number to check for
+	 * @return true if there is a floor with the given floor number and that this
+	 *         floor has a room with the given room number, false otherwise
+	 */
+	public boolean hasRoom(int floorNum, int roomNum)
 	{
-		return numFloors;
+		if (floorNum > 0 && floorNum <= hotelFloors.length)
+		{
+			return hotelFloors[floorNum - 1].hasRoom(roomNum);
+		}
+		else
+		{
+			return false;
+		}
 	}
-	
-	public void setFloors(int numFloors)
+
+	/**
+	 * Sets the clean state of the Room with the given room number
+	 * on the floor with the given floor number.
+	 * 
+	 * @param floor The floor number of the room
+	 * @param room The room number
+	 * @param isClean The clean status of the room
+	 */
+	public void setIsClean(int floor, int room, boolean isClean)
 	{
-		this.numFloors = numFloors;	
+		if (floor >= 1 && floor <= numFloors)
+		{
+			hotelFloors[floor - 1].setIsClean(room, isClean);
+
+			return;
+		}
+		else
+		{
+			System.out.println("There is no floor " + floor + " in this hotel!");
+		}
 	}
-	
-	
+
 	public String toString()
 	{
 		String object = "";
-		
+
 		object += "\nThis Hotel Object\n" 
 				+ "\tNumber Floors: " + numFloors;
-		
+
 		for(int j = 0; j < hotelFloors.length; j++)
 		{
 			object += hotelFloors[j].toString();
 		}
-		
+
 		object += "\n";
-		
+
 		return object;
 	}
-	
-	public void getRoomsByFloor()
+
+	private void getRoomsByFloor(int[] floorRooms)
 	{
-		int numRooms;
-		Scanner keyboard = new Scanner(System.in);
 		/*loop through each floor and assign it a specific amount of rooms*/
-		for(int i = 0; i < numFloors; i++)
+		for (int i = 0; i < floorRooms.length; i++)
 		{
-			System.out.println("\nInput the number of rooms on Floor-"+ (i + 1) + ": ");
-			numRooms = keyboard.nextInt();
-			Floor newFloor = new Floor(numRooms);
+			Floor newFloor = new Floor(i + 1, floorRooms[i]);
 			hotelFloors[i] = newFloor;
-			System.out.print(newFloor);	
 		}
 	}
 }

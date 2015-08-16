@@ -12,36 +12,48 @@ package net.fogthecatman;
  */
 
 public class Floor {
-	
-	public static int floorNumInc = 0;
-	public int floorNum;
-	public int numRooms;
-	public Room[] floorRooms;
-	
-	public Floor(int setRooms)
+
+	private final int floorNum;
+	private final int numRooms;
+	private final Room[] floorRooms;
+
+	public Floor(int floorNum, int setRooms)
 	{
-		floorNumInc++;
-		floorNum = floorNumInc;
+		this.floorNum = floorNum;
 		numRooms = setRooms;
 		floorRooms = new Room[numRooms];
 		setRoomsOnFloor();
 	}
-	public Floor()
+
+	/**
+	 * Checks to see if this floor has a room with the given number.
+	 * 
+	 * @param roomNum The room number to test
+	 * @return true if this floor has a room with this number, false otherwise
+	 */
+	public boolean hasRoom(int roomNum)
 	{
-		numRooms = 5;
+		return roomNum > 0 && roomNum <= floorRooms.length;
 	}
-	
-	//Gets and Sets
-	public int getRooms()
+
+	/**
+	 * Sets the clean state of the Room with the given room number.
+	 *  
+	 * @param room The room number
+	 * @param isClean The clean status of the room
+	 */
+	public void setIsClean(int room, boolean isClean)
 	{
-		return numRooms;
+		if (room > 0 && room < numRooms)
+		{
+			floorRooms[room - 1].setIsClean(isClean);
+		}
+		else
+		{
+			System.out.println("The is no room " + room + " on this floor!");
+		}
 	}
-	
-	public void setRooms(int numRooms)
-	{
-		this.numRooms = numRooms; 
-	}
-	
+
 	/*
 	 * This toString method is called whenever the object is
 	 * referenced. The for loop in this method adds the toString
@@ -51,24 +63,24 @@ public class Floor {
 	public String toString()
 	{
 		String object = "";
-		
+
 		object += "\nThis Floor Object-" + floorNum + ":\n"
 				+ "Number of Rooms: " + numRooms;
-		
+
 		for(int j = 0; j < floorRooms.length; j++)
 		{
 			object += 	 "\n\tRoom Number-" + (j + 1) + "\n"
-						 + floorRooms[j].toString();
+					+ floorRooms[j].toString();
 		}
-		
+
 		object += "\n";
-		
+
 		return object;
-				
+
 	}
-	
+
 	public void setRoomsOnFloor()
-	{	
+	{
 		for(int i = 0; i < numRooms; i++)
 		{
 			Room newRoom = new Room();

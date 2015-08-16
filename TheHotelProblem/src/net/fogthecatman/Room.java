@@ -2,9 +2,7 @@ package net.fogthecatman;
 
 /*
  * The Room Object keeps track of whether
- * it is clean or not. Users can access this object
- * from the @floorRooms Array in the Floor Object.
- * 
+ * it is clean or not.
  */
 
 public class Room {
@@ -14,10 +12,6 @@ public class Room {
 	public Room()
 	{
 		/*Default Constructor*/
-	}
-	public Room(boolean isClean)
-	{
-		this.isClean = isClean;
 	}
 	
 	//Gets and Sets
