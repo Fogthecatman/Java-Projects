@@ -1,0 +1,8 @@
+name: Hello
+main: my.pkg.Main
+version: 1.0
+commands:
+   hello:
+      description: This command prints hello in the chat
+      usage: /hello
+      permission: hello.true
