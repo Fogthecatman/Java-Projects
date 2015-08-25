@@ -1,3 +1,14 @@
+/*
+ * Refer to http://wiki.bukkit.org/Plugin_Tutorial  for more information
+ * 
+ * 
+ * 
+ * Remember to add spigot.jar to your build path and make sure your plugin.yml
+ * is up to date!
+ * 
+ * 
+ */
+
 package my.pkg;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -7,8 +18,8 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() 
 	{
-	   getLogger().info("Disenchanter has been Enabled");
-	   getCommand("disenchant").setExecutor(new Handler());
+	   getLogger().info("Hello has been Enabled");
+	   getCommand("hello").setExecutor(new Handler());
 	   
 	   
 	}
@@ -16,7 +27,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() 
 	{
-		getLogger().info("Disenchanter has been Disabled");
+		getLogger().info("Hello has been Disabled");
 	}
 
 }
